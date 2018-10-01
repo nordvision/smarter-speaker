@@ -31,6 +31,4 @@ expressApp.get('/search/actor', (req, res) => {
 
 });*/
 
-app.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
-
-
+expressApp.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
