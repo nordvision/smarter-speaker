@@ -19,7 +19,7 @@ app.intent('test', conv => {
         text: "Test response text"
     }))
 })
-expressApp.get('/healtcheck', (req, res) => res.sendStatus(200));
+expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
 expressApp.post('/fulfillment', app)
 
