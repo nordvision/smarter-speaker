@@ -5,7 +5,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const {
     dialogflow,
-    SimpleResponse,
+    SimpleResponse
 } = require('actions-on-google')
 
 const app = dialogflow()
@@ -13,11 +13,13 @@ const expressApp = express().use(bodyParser.json())
 const port = 3000
 
 app.intent('test', conv => {
+    conv.parameters.actors
     conv.ask(new SimpleResponse({
         speech: "Test response text",
         text: "Test response text"
     }))
 })
+expressApp.get('/healtcheck', (req, res) => res.sendStatus(200));
 
 expressApp.post('/fulfillment', app)
 
