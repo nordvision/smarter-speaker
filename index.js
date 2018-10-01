@@ -14,7 +14,7 @@ const port = 3000
 
 app.intent('test', conv => {
     conv.ask(new SimpleResponse({
-        displayText: "Test response text"
+        text: "Test response text"
     }))
 })
 
