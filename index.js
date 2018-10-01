@@ -11,12 +11,14 @@ const app = dialogflow()
 const expressApp = express().use(bodyParser.json())
 const port = 8081
 
-app.intent('test', conv => {
-    conv.parameters.actors
+app.intent('test', async conv => {
+    let actorResult = await moviedb.searchPerson({ query: conv.parameters.actors });
+    let movieResult = await moviedb.discoverMovie({ 'with_people': actorResult.results[0].id })
     conv.ask(new SimpleResponse({
-        speech: "Test response text",
-        text: "Test response text"
+        speech: movieResult.results[0].title,
+        text: movieResult.results[0].title
     }))
+
 })
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
