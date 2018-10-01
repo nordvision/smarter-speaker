@@ -14,6 +14,7 @@ const port = 3000
 
 app.intent('test', conv => {
     conv.ask(new SimpleResponse({
+        speech: "Test response text",
         text: "Test response text"
     }))
 })
@@ -21,6 +22,7 @@ app.intent('test', conv => {
 expressApp.post('/fulfillment', app)
 
 expressApp.get('/', (req, res) => res.send('Hello from smarter speaker!'));
+
 /*
 expressApp.get('/search/actor', (req, res) => {
     let query = req.query.q
