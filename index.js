@@ -10,8 +10,10 @@ app.get('/', (req, res) => res.send('Hello from smarter speaker!'));
 
 app.get('/search/actor', (req, res) => {
     let query = req.query.q
-    moviedb.searchPerson({ query: query }).then(result => {
-        res.send(result);
+    moviedb.searchPerson({ query: query }).then(actorResult => {
+        moviedb.discoverMovie({ 'with_people': actorResult.results[0].id }).then(movieResult => {
+            res.send(movieResult.results[0].title);
+        })
     }).catch(console.error);
 
 });
