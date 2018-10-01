@@ -1,6 +1,6 @@
 require('dotenv').config()
 const MovieDb = require('moviedb-promise')
-const moviedb = new MovieDb(process.env.APIKEY)
+const moviedb = new MovieDb(process.env.TMDB_APIKEY)
 const express = require('express')
 const bodyParser = require('body-parser')
 const {
@@ -32,6 +32,6 @@ expressApp.get('/search/actor', (req, res) => {
 
 });*/
 
-app.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
+expressApp.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
 
 
