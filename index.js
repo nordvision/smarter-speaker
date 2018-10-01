@@ -1,6 +1,6 @@
 require('dotenv').config()
 const MovieDb = require('moviedb-promise')
-const moviedb = new MovieDb(process.env.APIKEY)
+const moviedb = new MovieDb(process.env.TMDB_APIKEY)
 const express = require('express')
 const bodyParser = require('body-parser')
 const {
