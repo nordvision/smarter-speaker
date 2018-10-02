@@ -27,22 +27,23 @@ app.intent('test', async conv => {
         genreIds = _.union(genreIds, resultElement.genre_ids)
     }
     let genreTitles = [];
-    console.log(genreList);
+
     _.forEach(genreIds, id => {
         genreTitles.push(_.find(genreList.genres, genre => {
-            console.log(id);
             return genre.id == id
         }))
     })
+
     let genreResponse = []
-    console.log(genreTitles);
     genreResponse.push(genreTitles[0].name);
     genreResponse.push(genreTitles[1].name);
+
     let genreData = [];
     genreData[genreTitles[0].name] = genreTitles[0].id;
     genreData[genreTitles[1].name] = genreTitles[1].id;
     conv.data.actor = actorResult.results[0].id;
     conv.data.genreData = genreData;
+
     conv.ask(`Do you want to watch a ${genreTitles[0].name} or a ${genreTitles[1].name} movie`);
 
 })
@@ -56,7 +57,6 @@ app.intent('test - custom', async conv => {
 })
 
 app.intent('test - custom - no', conv => {
-    conv.data.count++;
     conv.data.count++;
     conv.ask(`Is ${conv.data.movieResult.results[conv.data.count].title} the movie you are looking for`);
 })
