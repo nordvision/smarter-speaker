@@ -52,6 +52,10 @@ app.intent('test', async conv => {
         }))
     }*/
 })
+
+app.intent('test - custom', conv => {
+    conv.ask('follow up');
+})
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
 expressApp.post('/fulfillment', app)
