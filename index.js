@@ -68,7 +68,7 @@ app.intent('test - custom', async conv => {
 
 app.intent('test - custom - no', conv => {
     conv.data.count++;
-    conv.ask(`Is ${movieResult.results[conv.data.count].title} the movie you are looking for`);
+    conv.ask(`Is ${conv.data.movieResult.results[conv.data.count].title} the movie you are looking for`);
 })
 
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
