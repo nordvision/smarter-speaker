@@ -38,6 +38,7 @@ app.intent('test', async conv => {
     genreResponse.push(genreTitles[0].name);
     genreResponse.push(genreTitles[1].name);
     console.log(genreResponse);
+    conv.data.actor = conv.parameters.actors;
     conv.ask('testing');
 
 
@@ -54,8 +55,9 @@ app.intent('test', async conv => {
 })
 
 app.intent('test - custom', conv => {
-
+    conv.ask(JSON.stringify(conv.data));
     conv.ask(JSON.stringify(conv.contexts));
+    conv.ask(JSON.stringify(conv.parameters));
 })
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
