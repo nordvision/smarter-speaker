@@ -45,17 +45,6 @@ app.intent('test', async conv => {
     conv.data.genreData = genreData;
     conv.ask(`Do you want to watch a ${genreTitles[0].name} or a ${genreTitles[1].name} movie`);
 
-
-    /*if(movieResult.results.length > 10){
-        conv.ask(new TransactionDecision({
-            intent: 'test2'
-        }))
-    }else{
-        conv.ask(new SimpleResponse({
-            speech: movieResult.results[0].title,
-            text: movieResult.results[0].title
-        }))
-    }*/
 })
 
 app.intent('test - custom', async conv => {
@@ -68,6 +57,7 @@ app.intent('test - custom', async conv => {
 
 app.intent('test - custom - no', conv => {
     conv.data.count++;
+    conv.data.count++;
     conv.ask(`Is ${conv.data.movieResult.results[conv.data.count].title} the movie you are looking for`);
 })
 
@@ -76,18 +66,6 @@ expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 expressApp.post('/fulfillment', app)
 
 expressApp.get('/', (req, res) => res.send('Hello from smarter speaker!'));
-
-/*
-expressApp.get('/search/actor', (req, res) => {
-    let query = req.query.q
-    moviedb.searchPerson({ query: query }).then(actorResult => {
-        moviedb.discoverMovie({ 'with_people': actorResult.results[0].id }).then(movieResult => {
-            res.send(movieResult.results[0].title);
-        })
-    }).catch(console.error);
-
-});
-*/
 
 expressApp.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
 
