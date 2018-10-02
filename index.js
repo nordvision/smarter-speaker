@@ -8,8 +8,7 @@ const {
     dialogflow,
     SimpleResponse,
     TransactionDecision,
-    Suggestions,
-    List
+    Suggestions
 } = require('actions-on-google')
 const app = dialogflow()
 const expressApp = express().use(bodyParser.json())
@@ -39,45 +38,7 @@ app.intent('test', async conv => {
     genreResponse.push(genreTitles[0].name);
     genreResponse.push(genreTitles[1].name);
     console.log(genreResponse);
-    conv.ask(new List({
-        title: 'Things to learn about',
-        items: {
-            // Add the first item to the list
-            'MATH_AND_PRIME': {
-                synonyms: [
-                    'math',
-                    'math and prime',
-                    'prime numbers',
-                    'prime',
-                ],
-                title: 'Title of the First List Item',
-                description: '42 is an abundant number',
-
-            },
-            // Add the second item to the list
-            'EGYPT': {
-                synonyms: [
-                    'religion',
-                    'egypt',
-                    'ancient egyptian',
-                ],
-                title: 'Ancient Egyptian religion',
-                description: '42 gods ruled on the fate of the dead in the afterworld',
-
-            },
-            // Add the last item to the list
-            'RECIPES': {
-                synonyms: [
-                    'recipes',
-                    'recipe',
-                    '42 recipes',
-                ],
-                title: '42 recipes in 42 ingredients',
-                description: 'A beautifully simple recipe',
-
-            },
-        },
-    }));
+    conv.ask('testing');
 
 
     /*if(movieResult.results.length > 10){
