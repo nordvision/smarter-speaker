@@ -60,12 +60,17 @@ app.intent('test', async conv => {
 
 app.intent('test - custom', async conv => {
     let genreId = conv.data.genreData[conv.parameters.genres]
-    console.log(conv.data.actor);
-    console.log(genreId);
     let movieResult = await moviedb.discoverMovie({ 'with_people': conv.data.actor, 'with_genres': genreId })
-    console.log(movieResult);
-    conv.ask(JSON.stringify(movieResult));
+    conv.data.movieResult = movieResult;
+    conv.data.count = 0;
+    conv.ask(movieResult.results[conv.data.count].title);
 })
+
+app.intent('test - custom - no', conv => {
+    conv.data.count++;
+    conv.ask(movieResult.results[conv.data.count].title);
+})
+
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
 expressApp.post('/fulfillment', app)
