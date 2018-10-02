@@ -5,7 +5,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const {
     dialogflow,
-    SimpleResponse
+    SimpleResponse,
+    TransactionDecision
 } = require('actions-on-google')
 const app = dialogflow()
 const expressApp = express().use(bodyParser.json())
@@ -13,11 +14,19 @@ const port = 8081
 
 app.intent('test', async conv => {
     let actorResult = await moviedb.searchPerson({ query: conv.parameters.actors });
+
     let movieResult = await moviedb.discoverMovie({ 'with_people': actorResult.results[0].id })
-    conv.ask(new SimpleResponse({
-        speech: movieResult.results[0].title,
-        text: movieResult.results[0].title
-    }))
+    if(movieResult.results.length > 10){
+        conv.ask(new TransactionDecision({
+            intent: 'test2'
+        }))
+    }else{
+        conv.ask(new SimpleResponse({
+            speech: movieResult.results[0].title,
+            text: movieResult.results[0].title
+        }))
+    }
+
 
 })
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
@@ -35,7 +44,8 @@ expressApp.get('/search/actor', (req, res) => {
         })
     }).catch(console.error);
 
-});*/
+});
+*/
 
 expressApp.listen(port, () => console.log(`Smarter speaker app listening on port ${port}!`))
 
