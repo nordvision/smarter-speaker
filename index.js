@@ -35,10 +35,14 @@ app.intent('test', async conv => {
         }))
     })
     let genreResponse = []
+    console.log(genreTitles);
     genreResponse.push(genreTitles[0].name);
     genreResponse.push(genreTitles[1].name);
-    console.log(genreResponse);
+    let genreData;
+    genreData[genreTitles[0].name] = genreTitles[0].id;
+    genreData[genreTitles[1].name] = genreTitles[1].id;
     conv.data.actor = conv.parameters.actors;
+    conv.data.genreData = genreData;
     conv.ask('testing');
 
 
@@ -54,9 +58,11 @@ app.intent('test', async conv => {
     }*/
 })
 
-app.intent('test - custom', conv => {
-    conv.ask(JSON.stringify(conv.data));
-    conv.ask(JSON.stringify(conv.contexts));
+app.intent('test - custom', async conv => {
+    let genreId = conv.data.genreData[conv.parameters.genres]
+    let movieResult = await moviedb.discoverMovie({ 'with_people': actorResult.results[0].id, 'with_genres': genreId })
+
+    conv.ask(JSON.stringify(movieResult));
     conv.ask(JSON.stringify(conv.parameters));
 })
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
