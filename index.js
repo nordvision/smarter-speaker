@@ -38,7 +38,7 @@ app.intent('test', async conv => {
     console.log(genreTitles);
     genreResponse.push(genreTitles[0].name);
     genreResponse.push(genreTitles[1].name);
-    let genreData;
+    let genreData = [];
     genreData[genreTitles[0].name] = genreTitles[0].id;
     genreData[genreTitles[1].name] = genreTitles[1].id;
     conv.data.actor = conv.parameters.actors;
