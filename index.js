@@ -54,7 +54,10 @@ app.intent('test', async conv => {
 })
 
 app.intent('test - custom', conv => {
-    conv.ask('follow up');
+    conv.ask(new SimpleResponse({
+        speech: 'follow up',
+        text: 'follow up'
+    }))
 })
 expressApp.get('/healthcheck', (req, res) => res.sendStatus(200));
 
